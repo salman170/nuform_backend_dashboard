@@ -6,6 +6,10 @@ import Dashboard from "./scenes/dashboard";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
+import Orders from "./scenes/orders";
+import Invoices from "./scenes/invoices";
+import Users from "./scenes/users";
+import Reviews from "./scenes/reviews";
 
 
 function App() {
@@ -22,10 +26,11 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              {/* <Route path="/team" element={<Team />} />
-              <Route path="/contacts" element={<Contacts />} />
+              <Route path="/orders" element={<Orders />} />
+               <Route path="/users" element={<Users />} />
               <Route path="/invoices" element={<Invoices />} />
-              <Route path="/form" element={<Form />} />
+              <Route path="/reviews" element={<Reviews />} />
+             {/* <Route path="/form" element={<Form />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
               <Route path="/line" element={<Line />} />
