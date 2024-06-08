@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -40,13 +40,40 @@ const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const [selected, setSelected] = useState("Dashboard");
+  const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    if (window.location.pathname === "/") {
+      setSelected("Dashboard");
+    }else if (window.location.pathname === "/orders") {
+      setSelected("Manage Orders");
+    }
+    else if (window.location.pathname === "/invoices") {
+      setSelected("Payments & Invoices");
+    }
+    else if (window.location.pathname === "/reviews") {
+      setSelected("Reviews & Ratings");
+    }
+    else if (window.location.pathname === "/users") {
+      setSelected("Users");
+    }
+    else if (window.location.pathname === "/form") {
+      setSelected("Profile Form");
+    }
+    else if (window.location.pathname === "/calendar") {
+      setSelected("Calendar");
+    }
+    else if (window.location.pathname === "/faq") {
+      setSelected("FAQ Page");
+    }
+  }, [setSelected]);
 
   return (
     <Box
       sx={{
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
+          height: "100vh",
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -61,19 +88,68 @@ const Sidebar = () => {
           color: "#6870fa !important",
         },
       }}
+      // display={
+      //   isCollapsed
+      //     ? "relative"
+      //     : "fixed"
+      //     // : { xs: "none", sm: "none", md: "block", lg: "block", xl: "block" }
+      // }
+      top={
+        isCollapsed
+          ? "0"
+          : "0"
+          // : { xs: "0", sm: "0", md: "0", lg: "0", xl: "0" }
+      }
+      left={
+        isCollapsed
+          ? "0"
+          : "0"
+          // : { xs: "0", sm: "0", md: "0", lg: "0", xl: "0" }
+      }
+      position={
+        // isCollapsed
+        //   ? "relative"
+        //   : "fixed"
+        "fixed"
+          // : { xs: "relative", sm: "relative", md: "fixed", lg: "fixed", xl: "fixed" }
+      }
+      zIndex={10}
+      height={"100%"}
     >
-      <ProSidebar collapsed={isCollapsed}>
+      <ProSidebar
+        collapsed={isCollapsed}
+        onMouseEnter={() => setIsCollapsed(false)}
+        onMouseLeave={() => setIsCollapsed(true)}
+      >
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            icon={
+              <Box
+                display="flex"
+                justifyContent="flex-end"
+                // alignItems="center"
+                ml="2px"
+              >
+                {isCollapsed && (
+                  <img
+                    alt="Logo"
+                    // width="50"
+                    height="16"
+                    src={`../../assets/logowhite.png`}
+                    // style={{ cursor: "pointer", borderRadius: "50%" }}
+                  />
+                )}
+              </Box>
+            }
+            // icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
               color: colors.grey[100],
             }}
           >
-            {!isCollapsed && (
+            {/* {!isCollapsed && (
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -90,10 +166,19 @@ const Sidebar = () => {
                   />
                 </Box>
 
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
-                </IconButton>
+                </IconButton> 
               </Box>
+            )}*/}
+            {!isCollapsed && (
+              <img
+                alt="Logo"
+                // width="50"
+                height="30"
+                src={`../../assets/logowhite.png`}
+                // style={{ cursor: "pointer", borderRadius: "50%" }}
+              />
             )}
           </MenuItem>
 
