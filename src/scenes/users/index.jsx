@@ -123,13 +123,13 @@ const Users = () => {
 
     setCol([
       { field: "id", headerName: "ID" },
-      { field: "name", headerName: "Name", flex: 1 },
-      { field: "phone", headerName: "Phone Number", flex: 1 },
-      { field: "email", headerName: "Email", flex: 1 },
+      { field: "name", headerName: "Name", flex: 1, width:150 },
+      { field: "phone", headerName: "Phone Number", flex: 1, width:150 },
+      { field: "email", headerName: "Email", flex: 1, width:150 },
       {
         field: "model",
         headerName: "Model",
-        flex: 1,
+        flex: 1, width:150,
         renderCell: (params) => {
           return (
             <div className="flex items-center">
@@ -144,11 +144,15 @@ const Users = () => {
           );
         },
       },
-      { field: "date", headerName: "Date" },
-      { field: "time", headerName: "Time" },
+      { field: "date", headerName: "Date", width:150 },
+      { field: "time", headerName: "Time", width:150 },
     ]);
     setData(res.data.data);
     setLoading(false);
+  };
+
+  const autosizeOptions = {
+    includeOutliers: true,
   };
 
   const CustomToolbar = () => {
@@ -250,6 +254,8 @@ const Users = () => {
             rows={newData}
             columns={col}
             slots={{ toolbar: CustomToolbar }}
+                getRowHeight={() => 'auto'}
+                autosizeOptions={autosizeOptions}
             sx={{
               backgroundColor: "white",
               fontSize: 15,

@@ -309,7 +309,10 @@ const Reviews = () => {
           <DataGrid
             rows={newData}
             columns={col}
-            slots={{ toolbar: CustomToolbar }}
+            slots={{
+              toolbar: CustomToolbar,
+             
+            }}
             sx={{
               backgroundColor: "white",
               fontSize: 15,
